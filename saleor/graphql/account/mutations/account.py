@@ -319,6 +319,7 @@ class AccountAddressCreate(ModelMutation, I18nMixin):
         )
         address = cls.validate_address(cleaned_input, address_type=address_type)
         cls.clean_instance(info, address)
+        address = cls.construct_instance(instance=address, cleaned_data=cleaned_input)
         cls.save(info, address, cleaned_input)
         cls._save_m2m(info, address, cleaned_input)
         if address_type:
